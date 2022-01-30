@@ -37,6 +37,11 @@ public class BookController {
         return books;
     }
 
+    @GetMapping("/count")
+    public int getCountOfBooks(){
+        return books.size();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Book> getOne(@PathVariable int id){
         ResponseEntity<Book> response;
@@ -56,7 +61,7 @@ public class BookController {
             Book existingBook = findBookById(book.getId());
             if (existingBook == null) {
                 books.add(book);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.CREATED);
             }
         }
         return response;

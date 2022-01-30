@@ -1,9 +1,15 @@
 package no.ntnu.crudrest;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Book {
+    @ApiModelProperty("Unique id of the book")
     private int id;
+    @ApiModelProperty("Name of the title")
     private String title;
+    @ApiModelProperty("Release year of the book")
     private int year;
+    @ApiModelProperty("Number of pages")
     private int numberOfPages;
 
     public Book(int id, String title, int year, int numberOfPages) {
