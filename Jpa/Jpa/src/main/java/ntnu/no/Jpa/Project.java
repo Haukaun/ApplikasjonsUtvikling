@@ -19,18 +19,9 @@ public class Project {
 
     private LocalDate endDate;
 
+
     public Project() {
 
-    }
-
-    protected Project(int id, String name, String leader, int budget, String startDate, String endDate) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.leader = leader;
-        this.budget = budget;
-        this.startDate = LocalDate.parse(startDate);
-        this.endDate = LocalDate.parse(endDate);
     }
 
     public boolean isValid(){
