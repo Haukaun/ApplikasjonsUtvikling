@@ -1,40 +1,36 @@
 package ntnu.no.Jpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import net.bytebuddy.asm.Advice;
+import org.apache.tomcat.jni.Local;
+
+import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Project {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String name;
-
     private String leader;
-
     private int budget;
 
-    private LocalDate startDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date startDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date endDate;
 
-    private LocalDate endDate;
+
 
     public Project() {
 
-    }
-
-    protected Project(int id, String name, String leader, int budget, String startDate, String endDate) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.leader = leader;
-        this.budget = budget;
-        this.startDate = LocalDate.parse(startDate);
-        this.endDate = LocalDate.parse(endDate);
-    }
-
-    public boolean isValid(){
-        return id > 0 && name != null && leader != null && budget > 0 && startDate != null && endDate !=null;
     }
 
     public int getId() {
@@ -69,20 +65,26 @@ public class Project {
         this.budget = budget;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+
+    @JsonIgnore
+    public boolean isValid() {
+        return (id > 0) && !"".equals(name) && "".equals(leader);
     }
 
 }
